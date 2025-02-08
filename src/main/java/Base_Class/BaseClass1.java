@@ -17,7 +17,6 @@ public class BaseClass1 {
 	        } else if (browser.equalsIgnoreCase("firefox")) {
 	            WebDriverManager.firefoxdriver().setup();
 	            driver = new FirefoxDriver();
-	            //done
 	        }
 
 	        driver.get("https://demo.hitechdairy.in/login");

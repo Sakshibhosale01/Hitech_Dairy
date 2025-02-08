@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class Login {
 
-	private WebDriver driver;
+	WebDriver driver;
 
     @FindBy(xpath = "//input[@id='mat-input-0']")
     private WebElement Username;
@@ -23,8 +23,8 @@ public class Login {
     private WebElement submit;
 
     public Login(WebDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(driver, this); // Initialize the elements
+        this.driver = driver;
     }
 
     public void enterUsername() throws InterruptedException {

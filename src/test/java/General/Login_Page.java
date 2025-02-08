@@ -14,6 +14,10 @@ public class Login_Page {
 
 	private WebDriver driver; // Declare as a class-level variable
 	
+	  public Login_Page(WebDriver driver) { // Accept WebDriver in constructor
+	        this.driver = driver;
+	    }
+	
 	@Test(priority = 0)
     public void LoginUser() throws InterruptedException{
         BaseClass1 base = new BaseClass1();     

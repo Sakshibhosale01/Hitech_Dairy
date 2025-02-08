@@ -11,18 +11,25 @@ import org.openqa.selenium.support.ui.Select;
 
 public class Bank {
 	
-	WebDriver driver;
-
-	@FindBy (xpath="//a[@id=\"v-pills-general-tab\"]")
+    WebDriver driver;
+	
+	@FindBy (xpath="//a[@id=\"tab0\"]")
 	private WebElement General_Module;
-
-	@FindBy (xpath="//a[text()=\"Bank Registration\"]")
-	private WebElement Bank_Regi_Page;
 	
-	@FindBy (xpath="//button[@class=\"btn-main mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\"]")
+	@FindBy (xpath="//div[@id=\"accordion00\"]")
+	private WebElement navigateToMaster;
+	
+	//@FindBy (xpath="//a[@class=\"list-group-item list-group-item-action active ng-star-inserted\"]")
+	//private WebElement clickBankRegister;
+	
+	@FindBy (xpath="//a[text()=\" Bank Register \"]")
+	private WebElement clickBankRegister;
+	
+	@FindBy (xpath="//span[@class=\"mdc-button__label\"]")
 	private WebElement AddBank;
+	int i =5;
 	
-	@FindBy (xpath="//input[@id=\"mat-input-5\"]")
+	@FindBy (xpath="//input[@id=\"mat-input-5\"]")//input[@id="mat-input-6"]
 	private WebElement BankName;
 	
 	@FindBy (xpath="//span[text()=\"Cancel\"]")
@@ -31,35 +38,34 @@ public class Bank {
 	@FindBy (xpath="//span[text()=\"Submit\"]")
 	private WebElement SubmitBtn;
 	
-	public Bank(WebDriver driver)
-	{
-		PageFactory.initElements(driver, this);
-		this.driver=driver;
+	public Bank(WebDriver driver) {
+	    this.driver = driver;
+	    PageFactory.initElements(driver, this);
 	}
 	
-	public void clickOnGeneralModule() throws InterruptedException
+	public void addBank() throws InterruptedException
 	{
+		Actions action = new Actions(driver);         //Performing the mouse hover action on the target element.
+		action.moveToElement(General_Module).perform();
 		Thread.sleep(1000);
-		//General_Module.click();
-	    WebElement ele = driver.findElement(By.xpath("//a[@class=\"nav-link active\"]"));
-		//Creating object of an Actions class
-		Actions action = new Actions(driver);
-		//Performing the mouse hover action on the target element.
-		action.moveToElement(ele).perform();
-		//this.to('www.anifarm.com');
+		navigateToMaster.click();
+		Thread.sleep(2000);
+		clickBankRegister.click();
+		Thread.sleep(2000);
+		AddBank.click();
 	}
 
-	public void clickOnBankRegiPage() throws InterruptedException
+/*	public void clickOnBankRegiPage() throws InterruptedException
 	{
 		Thread.sleep(2000);
-		Bank_Regi_Page.click();
+		clickBankRegister.click();
 	}
 	
 	public void clickOnAddBank() throws InterruptedException
 	{
 		Thread.sleep(2000);
 		AddBank.click();
-	}
+	}*/
 	
 	public void selectOrg()
 	{
@@ -81,7 +87,7 @@ public class Bank {
 	public void Submit() throws InterruptedException
 	{
 		Thread.sleep(2000);
-		//CancleBtn.click();  //Cancle the record 
+		//CancleBtn.click();  //cancel the record 
 		SubmitBtn.click();    // add bank name 
 	}
 	
