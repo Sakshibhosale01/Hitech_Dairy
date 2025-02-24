@@ -9,7 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class Bank {
+import Base_Class.Base;
+
+public class Bank extends Base {
 	
     WebDriver driver;
 	
@@ -45,6 +47,7 @@ public class Bank {
 	
 	public void addBank() throws InterruptedException
 	{
+		Thread.sleep(5000);
 		Actions action = new Actions(driver);         //Performing the mouse hover action on the target element.
 		action.moveToElement(General_Module).perform();
 		Thread.sleep(1000);
@@ -86,7 +89,7 @@ public class Bank {
 	
 	public void Submit() throws InterruptedException
 	{
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		//CancleBtn.click();  //cancel the record 
 		SubmitBtn.click();    // add bank name 
 	}

@@ -4,30 +4,23 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import Base_Class.BaseClass1;
+import Base_Class.Base;
 import POM_Classes.BankAcc;
 import POM_Classes.Designation;
-import POM_Classes.Login;
+import POM_Classes.UserLogin;
 
-public class BankAccountRegister {
+public class AddBankAccount {
 
-	private WebDriver driver; // Declare as a class-level variable
+ WebDriver driver; // Declare as a class-level variable
 
-	@BeforeClass
-	public void LoginUser() throws InterruptedException {
-		BaseClass1 base = new BaseClass1();
-		driver = base.getDriver("Chrome"); // Initialize the driver using getDriver
-		Login login = new Login(driver); // Pass the initialized driver to the Login class
-		login.enterUsername();
-		login.enterPassword();
-		//login.clickOnCaptcha();
-		login.clickOnSubmit();
-		System.out.println("Login successful");
-		// driver.quit(); // Optional: Close the browser after the test
-	}
+	@BeforeClass  // Runs before any test methods in this class
+    public void setDriver() {
+        driver = Login.driver;
+   }
 
 	@Test(priority = 1)
-	public void registerBank() throws InterruptedException {
+	public void registerBankAccount() throws InterruptedException {
+		Thread.sleep(3000);
 		BankAcc b = new BankAcc(driver);
 		b.navigateToBankAccRegister();
 		b.selectUnitName();
@@ -35,7 +28,6 @@ public class BankAccountRegister {
 		b.enterBankDetails();
 		b.enterAccountNoName();
 		b.clickSubmitButton();
-	
 	}
 	
 }

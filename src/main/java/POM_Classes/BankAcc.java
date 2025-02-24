@@ -24,8 +24,8 @@ public class BankAcc {
 
 	@FindBy(xpath = "//div[@id=\"accordion00\"]")
 	private WebElement navigateToMaster;
-
-	@FindBy(xpath = "//a[contains(text(), 'Bank Account Register')]") // a[contains(text(), 'Designation Register')]
+	//a[text()=\" Bank Register \"]//a[contains(text(), 'Bank Account Register')]
+	@FindBy(xpath = "//a[text()=\" Bank Account Register \"]") // a[contains(text(), 'Designation Register')]
 	private WebElement clickBankAccRegister;
 
 	@FindBy(xpath = "//span[@class=\"mdc-button__label\"]")
@@ -81,14 +81,26 @@ public class BankAcc {
 	}
 
 	public void navigateToBankAccRegister() throws InterruptedException {
-		Thread.sleep(1000);
-		Actions action = new Actions(driver); // Performing the mouse hover action on the target element.
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Wait for the sidebar menu to be visible
+        WebElement sidebarMenu = wait.until(ExpectedConditions.visibilityOf(General_Module));
+        Actions action = new Actions(driver); // Performing the mouse hover action on the target element.
 		action.moveToElement(General_Module).perform();
-		Thread.sleep(1000);
+
+        // Scroll into view (if necessary)
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", navigateToMaster);
+
+        // Wait until the element is clickable
+        wait.until(ExpectedConditions.elementToBeClickable(sidebarMenu)).click();
+
+		//Actions action = new Actions(driver); // Performing the mouse hover action on the target element.
+		//action.moveToElement(General_Module).perform();
+		Thread.sleep(2000);
 		navigateToMaster.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		clickBankAccRegister.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		addBankAccount.click();
 	}
 
@@ -97,12 +109,13 @@ public class BankAcc {
 	public void selectUnitName() throws InterruptedException {
 		Thread.sleep(1000);
 		selectUnitName.click();
-		// Select select = new Select(selectUnitName);
 		Thread.sleep(1000);
+		selectBranchUnitName.click();
+		// Select select = new Select(selectUnitName);
 		// Select by visible text
 		// WebElement option =
 		// driver.findElement(By.xpath("//mat-option//span[text()='Branch Unit 1']"));
-		selectBranchUnitName.click();
+		
 		// select.selectByVisibleText("Branch Unit 1");
 	}
 

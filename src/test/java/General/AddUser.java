@@ -1,30 +1,41 @@
 package General;
+
+import java.time.Duration;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import Base_Class.Base;
+import POM_Classes.UserLogin;
 import POM_Classes.User;
+import POM_Classes.UserLogin;
 
-public class UserRegister {
+public class AddUser {
 
-	    public static void main(String[] args) {
-	        // Setup WebDriver
-	        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
-	        WebDriver driver = new ChromeDriver();
-	        driver.manage().window().maximize();
-	        driver.get("http://example.com/user-registration"); // Replace with actual URL
+	WebDriver driver;
 
-	        // Instantiate POM
-	       // User userRegistration = new User(driver);
+	@BeforeClass
+	public void setup() throws InterruptedException {
+		Base base1 = new Base();
+		driver = base1.getDriver();  // Initialize the driver using getDriver
+		UserLogin login = new UserLogin(driver); // Pass the initialized driver to the Login class
+		login.enterUsername();
+		login.enterPassword();
+		//login.clickOnCaptcha();
+		login.clickOnSubmit();
+		System.out.println("Login successful");
+		// driver.quit(); // Optional: Close the browser after the test
+	}
 
-	        // Fill the form with random data
-	        //userRegistration.fillFormWithRandomData();
-
-	        // Submit the form
-	        //userRegistration.clickSubmit();
-
-	        // Close browser
-	        driver.quit();
-	    }
-	
+	@Test(priority = 1)
+	public void registerUser() throws InterruptedException {
+		User user = new User(driver);
+		user.navigateAddUser();
+		user.fillFormWithRandomData();
+		user.clickSubmit();	
+	}
 
 }
+
+/*driver.navigate().to("https://demo.hitechdairy.in/general/master/user-register"); // Navigate to
+ */
